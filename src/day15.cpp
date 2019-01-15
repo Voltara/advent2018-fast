@@ -65,14 +65,15 @@ struct Map {
 	}
 
 	uint16_t first() const {
+		alignas(__m256i) uint8_t arr[32];
 		for (int i = 0; i < 4; i++) {
 			uint32_t mask = _mm256_movemask_epi8(
 					_mm256_cmpeq_epi8(v[i], _mm256_setzero_si256()));
 			mask = ~mask;
 			if (mask) {
+				_mm256_store_si256((__m256i *) arr, v[i]);
 				int idx = _mm_tzcnt_32(mask);
-				uint32_t octet = _mm256_extract_epi8(v[i], idx);
-				return i * 256 + idx * 8 + _mm_tzcnt_32(octet);
+				return i * 256 + idx * 8 + _mm_tzcnt_32(arr[idx]);
 			}
 		}
 		return -1;
