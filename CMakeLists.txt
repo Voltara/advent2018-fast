@@ -4,8 +4,8 @@ project (advent2018)
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -std=c++17")
 
-set(CMAKE_C_COMPILER "clang" CACHE string "clang compiler" FORCE)
-set(CMAKE_CXX_COMPILER "clang++" CACHE string "clang++ compiler" FORCE)
+set(CMAKE_C_COMPILER "clang" CACHE STRING "clang compiler" FORCE)
+set(CMAKE_CXX_COMPILER "clang++" CACHE STRING "clang++ compiler" FORCE)
 
 add_executable(advent2018
 	src/main.cpp
